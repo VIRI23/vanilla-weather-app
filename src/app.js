@@ -43,8 +43,19 @@ function displayTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].icon);
 }
-let apiKey = "0567dbd2ccd9b60f60b6d0154cac7681";
-let city = "El Paso";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayTemperature);
+function search(city) {
+  let apiKey = "0567dbd2ccd9b60f60b6d0154cac7681";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+search("El Paso");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
